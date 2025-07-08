@@ -28,7 +28,8 @@ export class HomeComponent {
   jdFile: File | null = null;
   modelOptions: string[] = ['LLaMA-3', 'LLaMA2', 'Gemma'];
   selectedModel: string = '';
-  analysisResult: any = null;
+  analysisSuccess = false;
+  analysisStorageKey = '';
 
   constructor(private http: HttpClient) {}
 
@@ -71,7 +72,10 @@ export class HomeComponent {
     this.http.post('http://localhost:8000/analyze', formData).subscribe({
       next: (res) => {
         console.log('Response', res);
-        this.analysisResult = res;
+
+        const timestamp = new Date().toISOString();
+        const storageKey = `analysis_${timestamp}`;
+        localStorage.setItem(storageKey, JSON.stringify(res));
       },
       error: (err) => {
         console.error('API Error');
