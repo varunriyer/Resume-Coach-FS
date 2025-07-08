@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import {
+  MatProgressSpinnerModule,
+  MatSpinner,
+} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +24,7 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     MatSelectModule,
     RouterLink,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -32,6 +37,7 @@ export class HomeComponent {
   selectedModel: string = '';
   analysisSuccess = false;
   analysisStorageKey = '';
+  loading = false;
 
   constructor(private http: HttpClient) {}
 
@@ -58,6 +64,7 @@ export class HomeComponent {
   }
 
   onSubmit(): void {
+    this.loading = true;
     const formData = new FormData();
 
     if (this.selectedFile) {
@@ -81,9 +88,11 @@ export class HomeComponent {
 
         this.analysisSuccess = true;
         this.analysisStorageKey = storageKey;
+        this.loading = false;
       },
       error: (err) => {
         console.error('API Error');
+        this.loading = false;
       },
     });
   }

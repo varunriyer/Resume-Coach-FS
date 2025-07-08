@@ -101,3 +101,8 @@
 .analysis-button:hover {
   background-color: #388e3c;
 }
+
+mat-spinner {
+  margin: 0 auto;
+  display: block;
+}

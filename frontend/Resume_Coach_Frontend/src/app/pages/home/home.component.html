@@ -76,10 +76,13 @@
         color="primary"
         class="submit-button"
         (click)="onSubmit()"
-        [disabled]="!formValid()"
+        [disabled]="!formValid() || loading"
         [ngClass]="{ 'disabled-btn': !formValid() }"
       >
-        Submit
+        <ng-container *ngIf="!loading; else spinner"> Submit </ng-container>
+        <ng-template #spinner>
+          <mat-spinner diameter="24" strokeWidth="3"></mat-spinner>
+        </ng-template>
       </button>
     </div>
 
