@@ -6,6 +6,12 @@
   padding: 2rem;
 }
 
+@media (max-width: 600px) {
+  .page-container {
+    padding: 0;
+  }
+}
+
 .resume-card {
   width: 100%;
   max-width: 650px;
