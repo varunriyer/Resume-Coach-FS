@@ -1,0 +1,86 @@
+<div class="page-container">
+  <mat-card class="resume-card">
+    <h1 class="title">Resume Coach AI</h1>
+    <div class="section">
+      <h3 class="section-title">Upload Your Resume</h3>
+      <div class="file-input-group">
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="resumeFileInput.click()"
+        >
+          Attach Resume
+        </button>
+        <input
+          type="file"
+          #resumeFileInput
+          hidden
+          (change)="onFileSelected($event)"
+          accept=".pdf,.docx,.txt"
+        />
+        <span *ngIf="selectedFile" class="file-name">{{
+          selectedFile.name
+        }}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Provide Job Description</h3>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Enter Job Description</mat-label>
+        <textarea
+          matInput
+          rows="6"
+          [(ngModel)]="jobDescription"
+          (input)="onJDTextChange()"
+          [disabled]="jdFile !== null"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="file-input-group">
+        <button
+          mat-stroked-button
+          color="accent"
+          (click)="jdFileInput.click()"
+          [disabled]="jobDescription.trim().length > 0"
+        >
+          Attach JD File
+        </button>
+        <input
+          type="file"
+          #jdFileInput
+          hidden
+          (change)="onJDFileSelected($event)"
+          accept=".pdf,.docx,.txt"
+        />
+        <span *ngIf="jdFile" class="file-name">{{ jdFile.name }}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Choose AI Model</h3>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Select Model</mat-label>
+        <mat-select [(ngModel)]="selectedModel">
+          <mat-option *ngFor="let model of modelOptions" [value]="model">
+            {{ model }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="section submit-section">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-button"
+        (click)="onSubmit()"
+        [disabled]="!formValid()"
+        [ngClass]="{ 'disabled-btn': !formValid() }"
+      >
+        Submit
+      </button>
+    </div>
+  </mat-card>
+</div>
