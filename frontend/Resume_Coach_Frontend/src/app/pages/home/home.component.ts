@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,9 @@ export class HomeComponent {
   jdFile: File | null = null;
   modelOptions: string[] = ['LLaMA-3', 'LLaMA2', 'Gemma'];
   selectedModel: string = '';
+  analysisResult: any = null;
+
+  constructor(private http: HttpClient) {}
 
   onFileSelected(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
@@ -51,17 +55,28 @@ export class HomeComponent {
   }
 
   onSubmit(): void {
-    console.log('--- SUBMITTING ---');
+    const formData = new FormData();
 
-    console.log('Resume File:', this.selectedFile);
-
-    if (this.jdFile) {
-      console.log('JD File:', this.jdFile.name);
-    } else {
-      console.log('JD Text:', this.jobDescription);
+    if (this.selectedFile) {
+      formData.append('resume', this.selectedFile, this.selectedFile.name);
+    }
+    if (this.jobDescription.trim()) {
+      formData.append('jd_text', this.jobDescription.trim());
+    } else if (this.jdFile) {
+      formData.append('jd_file', this.jdFile, this.jdFile.name);
     }
 
-    console.log('Selected Model:', this.selectedModel);
+    formData.append('model', this.selectedModel);
+
+    this.http.post('http://localhost:8000/analyze', formData).subscribe({
+      next: (res) => {
+        console.log('Response', res);
+        this.analysisResult = res;
+      },
+      error: (err) => {
+        console.error('API Error');
+      },
+    });
   }
 
   formValid(): boolean {
