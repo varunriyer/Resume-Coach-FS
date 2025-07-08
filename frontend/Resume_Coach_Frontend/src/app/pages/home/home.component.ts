@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     FormsModule,
     MatSelectModule,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -76,6 +78,9 @@ export class HomeComponent {
         const timestamp = new Date().toISOString();
         const storageKey = `analysis_${timestamp}`;
         localStorage.setItem(storageKey, JSON.stringify(res));
+
+        this.analysisSuccess = true;
+        this.analysisStorageKey = storageKey;
       },
       error: (err) => {
         console.error('API Error');
