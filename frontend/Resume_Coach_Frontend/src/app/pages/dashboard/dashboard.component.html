@@ -1,1 +1,52 @@
-<router-outlet></router-outlet>
+<mat-drawer-container class="dashboard-container">
+  <mat-drawer mode="side" opened class="sidenav">
+    <mat-nav-list>
+      <div
+        mat-list-item
+        class="nav-item"
+        routerLink="/home"
+        [ngClass]="{ selected: selected === 'home' }"
+        (click)="onSelect('home')"
+      >
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </div>
+
+      <div
+        mat-list-item
+        class="nav-item"
+        routerLink="/home/analysis"
+        [ngClass]="{ selected: selected === 'analysis' }"
+        (click)="onSelect('analysis')"
+      >
+        <mat-icon>analytics</mat-icon>
+        <span>Analysis</span>
+      </div>
+
+      <div
+        class="nav-item-disabled"
+        mat-list-item
+        disabled
+        matTooltip="Coming Soon!"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+
+        <span>Saved Resumes</span>
+      </div>
+
+      <div
+        class="nav-item-disabled"
+        mat-list-item
+        disabled
+        matTooltip="Coming Soon!"
+      >
+        <mat-icon>description</mat-icon>
+        <span>Saved JDs</span>
+      </div>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content class="main-content">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
