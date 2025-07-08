@@ -82,5 +82,18 @@
         Submit
       </button>
     </div>
+
+    <div *ngIf="analysisSuccess" class="success-msg">
+      ✅ Your analysis is ready!
+      <button
+        mat-raised-button
+        color="primary"
+        class="analysis-button"
+        [routerLink]="['/analysis']"
+        [queryParams]="{ key: analysisStorageKey }"
+      >
+        View Analysis
+      </button>
+    </div>
   </mat-card>
 </div>
