@@ -1,13 +1,22 @@
-from fastapi import FastAPI, UploadFile, Form, File
+from fastapi import FastAPI, UploadFile, File, Form
+from typing import Union
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
+import os
+from dotenv import load_dotenv  # ✅ Load environment variables
+
+from resume_parser import DocumentParser
+from ai_coach import AICoach
+
+# ✅ Load .env file
+load_dotenv()
 
 app = FastAPI()
 
-# Allow Angular frontend access
+# ✅ Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or ["http://localhost:4200"] for stricter
+    allow_origins=["*"],  # Update this to your frontend URL for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -15,21 +24,41 @@ app.add_middleware(
 
 
 @app.get("/")
-def read_root():
-    return {"message": "Backend is running!"}
+def root():
+    return {"message": "Resume Coach AI backend is running"}
 
 
 @app.post("/analyze")
 async def analyze_resume(
     resume: UploadFile = File(...),
     jd_text: Optional[str] = Form(None),
-    jd_file: Optional[UploadFile] = File(None),
+    jd_file: Union[UploadFile, None, str] = File(default=None),
     model: str = Form(...),
 ):
-    # TODO: Use your ai_coach.py and resume_parser.py here
-    return {
-        "resume_filename": resume.filename,
-        "jd_text_received": bool(jd_text),
-        "jd_file_received": jd_file.filename if jd_file else None,
-        "model_selected": model,
-    }
+    parser = DocumentParser()
+
+    # ✅ Parse resume from bytes
+    resume_bytes = await resume.read()
+    resume_text = parser.parse_resume(
+        resume_bytes, os.path.splitext(resume.filename)[-1]
+    )
+
+    # ✅ Determine JD source: text or file
+    jd_text_final = jd_text
+    if jd_file and jd_file.filename != "":
+        jd_bytes = await jd_file.read()
+        jd_text_final = parser.parse_resume(
+            jd_bytes, os.path.splitext(jd_file.filename)[-1]
+        )
+
+    # ✅ Validate JD input
+    if not jd_text_final or jd_text_final.strip() == "":
+        return {"error": "No job description provided."}
+
+    # ✅ Run AI analysis
+    coach = AICoach(model=model)
+    feedback = coach.analyze_resume(
+        resume_text=resume_text, job_description=jd_text_final
+    )
+
+    return {"feedback": feedback, "model_used": model}
