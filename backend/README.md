@@ -12,7 +12,6 @@ backend/
 ├── ai_coach.py         # Handles AI model logic (Groq API)
 ├── resume_parser.py    # Parses PDF/DOCX/TXT resumes and JD files
 ├── chat_interface.py   # (Optional) Streamlit interface for quick testing
-├── temp_uploads/       # Temporary file storage
 └── venv/               # Virtual environment (not tracked by git)
 ```
 
