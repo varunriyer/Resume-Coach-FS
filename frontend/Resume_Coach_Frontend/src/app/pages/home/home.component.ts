@@ -85,12 +85,11 @@ export class HomeComponent {
         const timestamp = new Date().toISOString();
         const storageKey = `analysis_${timestamp}`;
 
-        // Add metadata to the response object before saving
         const analysisData = {
           ...res,
           resumeName: this.selectedFile?.name || 'Unknown Resume',
           jdFileName: this.jdFile?.name || null,
-          job_description: this.jobDescription.trim() || '', // use trimmed string if present
+          job_description: this.jobDescription.trim() || '',
         };
 
         localStorage.setItem(storageKey, JSON.stringify(analysisData));
