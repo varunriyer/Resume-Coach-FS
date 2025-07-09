@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class DashboardComponent {
   selected: string = 'home';
+  currentYear: number = new Date().getFullYear();
 
   onSelect(tab: string): void {
     this.selected = tab;

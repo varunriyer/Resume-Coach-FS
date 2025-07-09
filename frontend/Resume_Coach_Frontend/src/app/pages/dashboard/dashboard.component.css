@@ -74,6 +74,29 @@
   display: inline;
 }
 
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.router-content {
+  flex: 1;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f8f8;
+}
+
+.footer-content {
+  max-width: 100%;
+}
+
 @media (max-width: 1260px) {
   .nav-text {
     display: none;

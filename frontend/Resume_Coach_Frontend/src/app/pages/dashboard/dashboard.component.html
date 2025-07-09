@@ -47,6 +47,16 @@
   </mat-drawer>
 
   <mat-drawer-content class="main-content">
-    <router-outlet></router-outlet>
+    <div class="page-layout">
+      <div class="router-content">
+        <router-outlet></router-outlet>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-content">
+          © {{ currentYear }} Resume Coach AI · Made with ❤️ by Varun Iyer
+        </div>
+      </footer>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
