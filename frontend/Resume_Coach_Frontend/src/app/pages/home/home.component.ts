@@ -33,7 +33,7 @@ export class HomeComponent {
   selectedFile: File | null = null;
   jobDescription: string = '';
   jdFile: File | null = null;
-  modelOptions: string[] = ['LLaMA-3', 'LLaMA2', 'Gemma'];
+  modelOptions: string[] = ['LLaMA-3', 'LLaMA-3-Instant', 'Gemma'];
   selectedModel: string = '';
   analysisSuccess = false;
   analysisStorageKey = '';
