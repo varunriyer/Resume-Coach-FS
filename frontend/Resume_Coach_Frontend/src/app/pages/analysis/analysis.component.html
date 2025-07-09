@@ -3,8 +3,8 @@
 
   <div *ngIf="analysisHistory.length === 0" class="no-data-msg">
     🚫 No resumes analyzed yet.<br />
-    Go to the <a href="/home"><strong>Home</strong></a> tab and analyze a resume
-    to see results here.
+    Go to the <a routerLink="/home"><strong>Home</strong></a> tab and analyze a
+    resume to see results here.
   </div>
 
   <div *ngFor="let entry of analysisHistory" class="analysis-card">

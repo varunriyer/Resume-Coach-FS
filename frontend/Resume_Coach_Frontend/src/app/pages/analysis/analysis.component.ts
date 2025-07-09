@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { timestamp } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 interface AnalysisEntry {
   resumeName: string;
@@ -14,7 +13,7 @@ interface AnalysisEntry {
 }
 @Component({
   selector: 'app-analysis',
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, RouterLink],
   templateUrl: './analysis.component.html',
   styleUrl: './analysis.component.css',
 })
