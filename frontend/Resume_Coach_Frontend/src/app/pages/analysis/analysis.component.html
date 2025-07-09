@@ -1,1 +1,9 @@
-<p>analysis works!</p>
+<div class="analysis-container">
+  <h2 class="page-title">📊 Previous Analyses</h2>
+
+  <div *ngIf="analysisHistory.length === 0" class="no-data-msg">
+    🚫 No resumes analyzed yet.<br />
+    Go to the <a href="/home"><strong>Home</strong></a> tab and analyze a resume
+    to see results here.
+  </div>
+</div>

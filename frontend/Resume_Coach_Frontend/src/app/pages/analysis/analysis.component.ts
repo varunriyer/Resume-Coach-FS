@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,7 @@ interface AnalysisEntry {
 }
 @Component({
   selector: 'app-analysis',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './analysis.component.html',
   styleUrl: './analysis.component.css',
 })
