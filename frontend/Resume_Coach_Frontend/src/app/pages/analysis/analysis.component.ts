@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { timestamp } from 'rxjs';
 
 interface AnalysisEntry {
   resumeName: string;
@@ -9,6 +10,7 @@ interface AnalysisEntry {
   matchPercentage: number;
   storageKey: string;
   date: string;
+  timestamp: string;
 }
 @Component({
   selector: 'app-analysis',
@@ -25,32 +27,47 @@ export class AnalysisComponent implements OnInit {
       key.startsWith('analysis_')
     );
 
-    this.analysisHistory = keys.map((key) => {
-      const data = JSON.parse(localStorage.getItem(key) || '{}');
+    const history = keys
+      .map((key) => {
+        const data = JSON.parse(localStorage.getItem(key) || '{}');
 
-      const jdText =
-        data.job_description && data.job_description.length > 0
-          ? data.job_description.length > 40
-            ? `${data.job_description.slice(0, 40)}...`
-            : data.job_description
-          : data.jdFileName || 'JD';
+        const jdText =
+          data.job_description && data.job_description.length > 0
+            ? data.job_description.length > 40
+              ? `${data.job_description.slice(0, 40)}...`
+              : data.job_description
+            : data.jdFileName || 'JD';
 
-      const rawDate = data.timestamp;
-      const formattedDate = rawDate
-        ? new Date(rawDate).toLocaleString()
-        : 'Date Unknown';
+        const rawDate = data.timestamp;
+        const formattedDate = rawDate
+          ? new Date(rawDate).toLocaleString()
+          : 'Date Unknown';
 
-      return {
-        resumeName: data.resumeName || 'Unknown',
-        jdSource: jdText,
-        matchPercentage: data.feedback?.match_percentage || 0,
-        storageKey: key,
-        date: formattedDate,
-      };
-    });
+        return {
+          resumeName: data.resumeName || 'Unknown',
+          jdSource: jdText,
+          matchPercentage: data.feedback?.match_percentage || 0,
+          storageKey: key,
+          date: formattedDate,
+          timestamp: rawDate || '',
+        };
+      })
+      .filter((entry) => entry.timestamp)
+      .sort(
+        (a, b) =>
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      );
+
+    this.analysisHistory = history;
   }
 
   viewAnalysis(key: string): void {
     this.router.navigate(['/home/analysis'], { queryParams: { key } });
+  }
+
+  getScoreClass(score: number): string {
+    if (score >= 80) return 'score-green';
+    if (score >= 50) return 'score-yellow';
+    return 'score-red';
   }
 }
