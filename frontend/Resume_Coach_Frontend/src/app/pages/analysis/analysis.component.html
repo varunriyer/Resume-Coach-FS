@@ -10,8 +10,14 @@
   <div *ngFor="let entry of analysisHistory" class="analysis-card">
     <div class="card-header">
       <div>
-        <h3>{{ entry.resumeName }}</h3>
-        <p><strong>JD:</strong>{{ entry.jdSource }}</p>
+        <h3>
+          <mat-icon class="inline-icon">description</mat-icon>
+          {{ entry.resumeName }}
+        </h3>
+        <p>
+          <mat-icon class="inline-icon">assignment</mat-icon>
+          <strong>JD:</strong>{{ entry.jdSource }}
+        </p>
 
         <p class="timestamp">🕒 {{ entry.date }}</p>
       </div>
@@ -20,12 +26,15 @@
         {{ entry.matchPercentage }}%
       </div>
     </div>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="viewAnalysis(entry.storageKey)"
-    >
-      View Full Analysis
-    </button>
+    <div class="card-footer">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="viewAnalysis(entry.storageKey)"
+        matTooltip="View Full Analysis"
+      >
+        <mat-icon> visibility</mat-icon> View Analysis
+      </button>
+    </div>
   </div>
 </div>

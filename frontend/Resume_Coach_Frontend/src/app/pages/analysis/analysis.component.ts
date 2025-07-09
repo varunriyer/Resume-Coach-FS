@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 
 interface AnalysisEntry {
@@ -13,7 +15,13 @@ interface AnalysisEntry {
 }
 @Component({
   selector: 'app-analysis',
-  imports: [CommonModule, MatButtonModule, RouterLink],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   templateUrl: './analysis.component.html',
   styleUrl: './analysis.component.css',
 })
