@@ -87,6 +87,7 @@ export class HomeComponent {
 
         const analysisData = {
           ...res,
+          timestamp,
           resumeName: this.selectedFile?.name || 'Unknown Resume',
           jdFileName: this.jdFile?.name || null,
           job_description: this.jobDescription.trim() || '',
