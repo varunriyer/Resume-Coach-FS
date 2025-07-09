@@ -69,7 +69,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   viewAnalysis(key: string): void {
-    this.router.navigate(['/home/analysis'], { queryParams: { key } });
+    this.router.navigate(['/home/analysis/view'], { queryParams: { key } });
   }
 
   getScoreClass(score: number): string {
