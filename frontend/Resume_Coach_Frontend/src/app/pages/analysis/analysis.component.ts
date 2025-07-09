@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 interface AnalysisEntry {
@@ -10,7 +11,7 @@ interface AnalysisEntry {
 }
 @Component({
   selector: 'app-analysis',
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './analysis.component.html',
   styleUrl: './analysis.component.css',
 })
@@ -27,8 +28,10 @@ export class AnalysisComponent implements OnInit {
       const data = JSON.parse(localStorage.getItem(key) || '{}');
 
       const jdText =
-        data.job_description?.length > 0
-          ? `${data.job_description.slice(0, 40)}...`
+        data.job_description && data.job_description.length > 0
+          ? data.job_description.length > 40
+            ? `${data.job_description.slice(0, 40)}...`
+            : data.job_description
           : data.jdFileName || 'JD';
 
       return {
