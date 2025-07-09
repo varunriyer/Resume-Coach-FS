@@ -7,11 +7,19 @@
     to see results here.
   </div>
 
-  <div *ngFor="let entry of analysisHistory.reverse()" class="analysis-card">
-    <h3>{{ entry.resumeName }}</h3>
-    <p><strong>JD:</strong>{{ entry.jdSource }}</p>
-    <p><strong>Match:</strong>{{ entry.matchPercentage }}</p>
+  <div *ngFor="let entry of analysisHistory" class="analysis-card">
+    <div class="card-header">
+      <div>
+        <h3>{{ entry.resumeName }}</h3>
+        <p><strong>JD:</strong>{{ entry.jdSource }}</p>
 
+        <p class="timestamp">🕒 {{ entry.date }}</p>
+      </div>
+
+      <div class="match-score" [ngClass]="getScoreClass(entry.matchPercentage)">
+        {{ entry.matchPercentage }}%
+      </div>
+    </div>
     <button
       mat-raised-button
       color="primary"

@@ -28,3 +28,72 @@
 .analysis-card h3 {
   margin-top: 0;
 }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.3rem;
+}
+
+.match-score {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.score-green {
+  background-color: #4caf50;
+}
+
+.score-yellow {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.score-red {
+  background-color: #f44336;
+}
+
+@media screen and (max-width: 650px) {
+  .match-score {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    padding: 0;
+    font-size: 1rem;
+    background-color: transparent;
+    font-weight: 600;
+  }
+
+  .score-green {
+    color: #4caf50;
+  }
+
+  .score-yellow {
+    color: #ffc107;
+  }
+
+  .score-red {
+    color: #f44336;
+  }
+
+  .timestamp {
+    margin-bottom: 0.8rem;
+  }
+  .analysis-card h3 {
+    font-size: 1rem;
+  }
+}
