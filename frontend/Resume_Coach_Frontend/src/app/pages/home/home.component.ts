@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   MatProgressSpinnerModule,
   MatSpinner,
@@ -39,7 +39,7 @@ export class HomeComponent {
   analysisStorageKey = '';
   loading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onFileSelected(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
