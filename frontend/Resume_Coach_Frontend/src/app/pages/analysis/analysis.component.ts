@@ -8,6 +8,7 @@ interface AnalysisEntry {
   jdSource: string;
   matchPercentage: number;
   storageKey: string;
+  date: string;
 }
 @Component({
   selector: 'app-analysis',
@@ -34,11 +35,17 @@ export class AnalysisComponent implements OnInit {
             : data.job_description
           : data.jdFileName || 'JD';
 
+      const rawDate = data.timestamp;
+      const formattedDate = rawDate
+        ? new Date(rawDate).toLocaleString()
+        : 'Date Unknown';
+
       return {
         resumeName: data.resumeName || 'Unknown',
         jdSource: jdText,
         matchPercentage: data.feedback?.match_percentage || 0,
         storageKey: key,
+        date: formattedDate,
       };
     });
   }
