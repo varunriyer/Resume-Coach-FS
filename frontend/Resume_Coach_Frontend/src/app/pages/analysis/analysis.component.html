@@ -6,4 +6,18 @@
     Go to the <a href="/home"><strong>Home</strong></a> tab and analyze a resume
     to see results here.
   </div>
+
+  <div *ngFor="let entry of analysisHistory.reverse()" class="analysis-card">
+    <h3>{{ entry.resumeName }}</h3>
+    <p><strong>JD:</strong>{{ entry.jdSource }}</p>
+    <p><strong>Match:</strong>{{ entry.matchPercentage }}</p>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="viewAnalysis(entry.storageKey)"
+    >
+      View Full Analysis
+    </button>
+  </div>
 </div>
