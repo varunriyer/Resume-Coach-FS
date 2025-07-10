@@ -78,32 +78,34 @@ export class HomeComponent {
 
     formData.append('model', this.selectedModel);
 
-    this.http.post('http://localhost:8000/analyze', formData).subscribe({
-      next: (res) => {
-        console.log('Response', res);
+    this.http
+      .post('https://resume-coach-fs.onrender.com/analyze', formData)
+      .subscribe({
+        next: (res) => {
+          console.log('Response', res);
 
-        const timestamp = new Date().toISOString();
-        const storageKey = `analysis_${timestamp}`;
+          const timestamp = new Date().toISOString();
+          const storageKey = `analysis_${timestamp}`;
 
-        const analysisData = {
-          ...res,
-          timestamp,
-          resumeName: this.selectedFile?.name || 'Unknown Resume',
-          jdFileName: this.jdFile?.name || null,
-          job_description: this.jobDescription.trim() || '',
-        };
+          const analysisData = {
+            ...res,
+            timestamp,
+            resumeName: this.selectedFile?.name || 'Unknown Resume',
+            jdFileName: this.jdFile?.name || null,
+            job_description: this.jobDescription.trim() || '',
+          };
 
-        localStorage.setItem(storageKey, JSON.stringify(analysisData));
+          localStorage.setItem(storageKey, JSON.stringify(analysisData));
 
-        this.analysisSuccess = true;
-        this.analysisStorageKey = storageKey;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('API Error');
-        this.loading = false;
-      },
-    });
+          this.analysisSuccess = true;
+          this.analysisStorageKey = storageKey;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('API Error');
+          this.loading = false;
+        },
+      });
   }
 
   formValid(): boolean {
