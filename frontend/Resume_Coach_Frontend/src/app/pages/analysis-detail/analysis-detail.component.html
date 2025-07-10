@@ -2,8 +2,15 @@
   <div class="analysis-panel">
     <h2 class="section-title">📈 Detailed Analysis</h2>
     <mat-card class="info-card">
-      <h3>📄 Resume: {{ analysisData.resumeName || "Unknown" }}</h3>
-      <p><strong> 📝 JD:</strong> {{ jdSource }}</p>
+      <mat-card-header>
+        <mat-card-title
+          >📄 Resume: {{ analysisData.resumeName || "Unknown" }}</mat-card-title
+        >
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p><strong>📝 JD:</strong> {{ jdSource }}</p>
+      </mat-card-content>
     </mat-card>
 
     <mat-card class="score-card">
@@ -12,7 +19,6 @@
           🕒 {{ analysisData.timestamp | date : "short" }}
         </p>
       </div>
-
       <div class="score-center">
         <h3>Match Score</h3>
         <div
@@ -22,46 +28,78 @@
           {{ analysisData.feedback.match_percentage }}%
         </div>
       </div>
-
       <div class="score-right">
         <p class="model-used">🤖 {{ analysisData.model_used || "Unknown" }}</p>
       </div>
     </mat-card>
 
     <mat-card class="info-card">
-      <h3>✅ Matching Skills</h3>
-      <ul>
-        <li *ngFor="let skill of analysisData.feedback.matching_skills">
-          {{ skill }}
-        </li>
-      </ul>
+      <mat-card-header>
+        <mat-card-title>✅ Matching Skills</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-chip-listbox aria-label="Matching Skills">
+          <mat-chip
+            *ngFor="let skill of analysisData.feedback.matching_skills"
+            color="primary"
+            highlighted
+          >
+            {{ skill }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </mat-card-content>
     </mat-card>
 
     <mat-card class="info-card">
-      <h3>❌ Missing Skills</h3>
-      <ul>
-        <li *ngFor="let skill of analysisData.feedback.missing_skills">
-          {{ skill }}
-        </li>
-      </ul>
+      <mat-card-header>
+        <mat-card-title>❌ Missing Skills</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-chip-listbox aria-label="Missing Skills">
+          <mat-chip
+            *ngFor="let skill of analysisData.feedback.missing_skills"
+            color="warn"
+            highlighted
+          >
+            {{ skill }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </mat-card-content>
     </mat-card>
 
     <mat-card class="info-card">
-      <h3>📌 Extra Skills</h3>
-      <ul>
-        <li *ngFor="let skill of analysisData.feedback.extra_skills">
-          {{ skill }}
-        </li>
-      </ul>
+      <mat-card-header>
+        <mat-card-title>📌 Extra Skills</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-chip-listbox aria-label="Extra Skills">
+          <mat-chip
+            *ngFor="let skill of analysisData.feedback.extra_skills"
+            color="accent"
+            highlighted
+          >
+            {{ skill }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </mat-card-content>
     </mat-card>
 
     <mat-card class="info-card">
-      <h3>💡 Recommendations</h3>
-      <ul>
-        <li *ngFor="let tip of analysisData.feedback.recommendations">
-          {{ tip }}
-        </li>
-      </ul>
+      <mat-card-header>
+        <mat-card-title>💡 Recommendations</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br />
+      <mat-card-content>
+        <ul class="recommendation-list">
+          <li *ngFor="let tip of analysisData.feedback.recommendations">
+            {{ tip }}
+          </li>
+        </ul>
+      </mat-card-content>
     </mat-card>
   </div>
 
@@ -71,9 +109,14 @@
       matTooltip="Coming Soon!"
       matTooltipPosition="below"
     >
-      <h3>🤖 Career Coach Chat</h3>
-      <p>Coming soon! You'll be able to chat with your AI Coach here.</p>
-      <span style="font-size: 2rem; font-weight: bold"> ⏳ </span>
+      <mat-card-header>
+        <mat-card-title>🤖 Career Coach Chat</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>Coming soon! You'll be able to chat with your AI Coach here.</p>
+        <span class="coming-soon-icon">⏳</span>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>

@@ -1,13 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-analysis-detail',
-  imports: [MatCardModule, CommonModule, MatIconModule, MatTooltipModule],
+  imports: [
+    MatCardModule,
+    CommonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatChipsModule,
+  ],
   templateUrl: './analysis-detail.component.html',
   styleUrl: './analysis-detail.component.css',
 })
