@@ -1,1 +1,79 @@
-<p>analysis-detail works!</p>
+<div class="detail-container">
+  <div class="analysis-panel">
+    <h2 class="section-title">📈 Detailed Analysis</h2>
+    <mat-card class="info-card">
+      <h3>📄 Resume: {{ analysisData.resumeName || "Unknown" }}</h3>
+      <p><strong> 📝 JD:</strong> {{ jdSource }}</p>
+    </mat-card>
+
+    <mat-card class="score-card">
+      <div class="score-left">
+        <p class="timestamp">
+          🕒 {{ analysisData.timestamp | date : "short" }}
+        </p>
+      </div>
+
+      <div class="score-center">
+        <h3>Match Score</h3>
+        <div
+          class="score-circle"
+          [ngClass]="getScoreClass(analysisData.feedback.match_percentage)"
+        >
+          {{ analysisData.feedback.match_percentage }}%
+        </div>
+      </div>
+
+      <div class="score-right">
+        <p class="model-used">🤖 {{ analysisData.model_used || "Unknown" }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <h3>✅ Matching Skills</h3>
+      <ul>
+        <li *ngFor="let skill of analysisData.feedback.matching_skills">
+          {{ skill }}
+        </li>
+      </ul>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <h3>❌ Missing Skills</h3>
+      <ul>
+        <li *ngFor="let skill of analysisData.feedback.missing_skills">
+          {{ skill }}
+        </li>
+      </ul>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <h3>📌 Extra Skills</h3>
+      <ul>
+        <li *ngFor="let skill of analysisData.feedback.extra_skills">
+          {{ skill }}
+        </li>
+      </ul>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <h3>💡 Recommendations</h3>
+      <ul>
+        <li *ngFor="let tip of analysisData.feedback.recommendations">
+          {{ tip }}
+        </li>
+      </ul>
+    </mat-card>
+  </div>
+
+  <div class="chatbot-panel">
+    <mat-card
+      class="chat-placeholder"
+      matTooltip="Coming Soon!"
+      matTooltipPosition="below"
+    >
+      <h3>🤖 Career Coach Chat</h3>
+      <p>Coming soon! You'll be able to chat with your AI Coach here.</p>
+      <span style="font-size: 2rem; font-weight: bold"> ⏳ </span>
+    </mat-card>
+  </div>
+</div>

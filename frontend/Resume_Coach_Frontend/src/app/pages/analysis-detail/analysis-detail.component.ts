@@ -1,15 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-analysis-detail',
-  imports: [],
+  imports: [MatCardModule, CommonModule, MatIconModule, MatTooltipModule],
   templateUrl: './analysis-detail.component.html',
   styleUrl: './analysis-detail.component.css',
 })
 export class AnalysisDetailComponent implements OnInit {
   analysisData: any = null;
-
+  jdSource: string = 'JD';
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
@@ -26,5 +30,18 @@ export class AnalysisDetailComponent implements OnInit {
         this.router.navigate(['home/analysis']);
       }
     });
+    console.log(this.analysisData);
+
+    this.jdSource =
+      this.analysisData.job_description &&
+      this.analysisData.job_description.length > 0
+        ? this.analysisData.job_description
+        : this.analysisData.jdFileName || 'JD';
+  }
+
+  getScoreClass(score: number): string {
+    if (score >= 80) return 'score-green';
+    if (score >= 50) return 'score-yellow';
+    return 'score-red';
   }
 }
