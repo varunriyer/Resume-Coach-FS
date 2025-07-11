@@ -56,15 +56,30 @@
 }
 
 .match-score {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  font-size: 1.1rem;
+  font-size: 1.75rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  position: relative;
+  overflow: hidden;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 .score-green {
@@ -86,7 +101,7 @@
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 675px) {
   .match-score {
     width: auto;
     height: auto;
